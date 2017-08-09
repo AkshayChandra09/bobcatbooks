@@ -19,15 +19,26 @@ $card_expiry_month = $_POST['CardExpiryMonth'];
 $card_expiry_year = $_POST['CardExpiryYear'];
 
 //Database connection variables.
-$servername = 'localhost';
+$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+
+$server = $url["host"];
+$username = $url["user"];
+$password = $url["pass"];
+$db = substr($url["path"], 1);
+
+$conn = new mysqli($server, $username, $password, $db);
+
+
+
+/*$servername = 'localhost';
 $user = "root";
 $pwd="";
 $dbname = 'bobcat_books';
 $isUserPresent = false;
 $error= "User already present";
-$registrationSuccess="User Registered successfully";
+$conn = new mysqli($servername,$user,$pwd,$dbname);*/
 
-$conn = new mysqli($servername,$user,$pwd,$dbname);
+$registrationSuccess="User Registered successfully";
 
 if($conn->connect_error){
 	die(" connection failed: ".$conn->connect_error);
