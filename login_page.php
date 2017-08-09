@@ -1,12 +1,24 @@
 <?php
-	$servername = "localhost";
+	
+$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+
+$server = $url["host"];
+$username = $url["user"];
+$password = $url["pass"];
+$db = substr($url["path"], 1);
+
+$conn = new mysqli($server, $username, $password, $db);
+	
+	
+	
+	/*$servername = "localhost";
 	$username = "root";
 	$password = "";
 	$dbname = "bobcat_books";
-	$loginerror = "Invalid username or password";
-
+	
 	// Create connection
-	$conn = new mysqli($servername, $username, $password, $dbname);
+	$conn = new mysqli($servername, $username, $password, $dbname);*/
+	$loginerror = "Invalid username or password";
 	// Check connection
 	if($conn->connect_error){
 		die(" connection failed: ".$conn->connect_error);
